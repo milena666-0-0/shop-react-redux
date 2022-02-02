@@ -1,22 +1,28 @@
+import { useState } from "react";
 import { Box, Container } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import YupPassword from "yup-password";
 import { useDispatch } from "react-redux";
-import {useSelector} from 'react-redux';
-
+import { useSelector } from "react-redux";
 
 import { SIGN_UP_REQUEST } from "../actions/index";
 import { SignUpFormView } from "../components/SignUpFormView";
-import {signUpSelector} from '../selectors/index';
-
+import { signUpSelector } from "../selectors/index";
 
 export const SignUpFormContainer = () => {
 	YupPassword(yup);
 
+	const [inputType, setInputType] = useState("password");
+
 	const dispatch = useDispatch();
 
-	const {errors, isLoading} = useSelector(signUpSelector);
+	const { errors, isLoading } = useSelector(signUpSelector);
+
+	const handleChangeInputType = () => {
+		const newInputType = inputType === "password" ? "text" : "password";
+		setInputType(newInputType);
+	};
 
 	const validationSchema = yup.object({
 		firstName: yup
@@ -51,9 +57,14 @@ export const SignUpFormContainer = () => {
 			.typeError("Should be a string")
 			.password("Password is invalid")
 			.minUppercase(1, "Password must contain at least 1 upper letter")
+			.minLowercase(0)
 			.minSymbols(0)
 			.min(8, "Password should be of minimum 8 characters length")
 			.required("Password is required"),
+		confirmPassword: yup
+			.string()
+			.oneOf([yup.ref("password"), null], "Passwords doesn't match")
+			.required("Confirm Password is required"),
 	});
 
 	const formik = useFormik({
@@ -70,17 +81,25 @@ export const SignUpFormContainer = () => {
 			gender: "",
 			password: "",
 			phone: "",
+			confirmPassword: "",
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
-			dispatch(SIGN_UP_REQUEST(values));
+			const {confirmPassword, ...requestData} = values;
+			dispatch(SIGN_UP_REQUEST(requestData));
 		},
 	});
 
 	return (
 		<Box>
-			<Container>	
-				<SignUpFormView isLoading={isLoading} errors={errors} formik={formik} />
+			<Container>
+				<SignUpFormView
+					handleChangeInputType={handleChangeInputType}
+					inputType={inputType}
+					isLoading={isLoading}
+					errors={errors}
+					formik={formik}
+				/>
 			</Container>
 		</Box>
 	);

@@ -1,25 +1,33 @@
 import {
 	Box,
 	TextField,
-	FormControlLabel,
-	Radio,
-	RadioGroup,
 	FormHelperText,
+	Select,
+	MenuItem,
+	InputAdornment,
+	IconButton,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import { Button } from "../../../components/Button/index";
 import { isSubmitButtonDisabled } from "../../../utils/isSubmitButtonDisabled";
 import { Spinner } from "../../../components/Spinner/index";
 
-
 import { styles } from "./styles";
 
 const useStyles = makeStyles(styles);
 
-export const SignUpFormView = ({ formik, errors, isLoading }) => {
+export const SignUpFormView = ({
+	formik,
+	errors,
+	isLoading,
+	handleChangeInputType,
+	inputType,
+}) => {
 	const classes = useStyles();
 	const disabled = !isSubmitButtonDisabled(formik) || isLoading;
 
@@ -130,23 +138,18 @@ export const SignUpFormView = ({ formik, errors, isLoading }) => {
 			<label className={classes.label}>
 				Gender<span className={classes.required}>*</span>
 			</label>
-			<RadioGroup
-				row
-				onChange={formik.handleChange}
-				value={formik.values.gender}
-				name="controlled-radio-buttons-group"
-			>
-				<FormControlLabel
-					value="female"
-					control={<Radio name="gender" color="secondary" />}
-					label="Female"
-				/>
-				<FormControlLabel
-					value="male"
-					control={<Radio name="gender" color="secondary" />}
-					label="Male"
-				/>
-			</RadioGroup>
+			<Box>
+				<Select
+					sx={{ minWidth: "50%" }}
+					color="secondary"
+					name="gender"
+					value={formik.values.gender}
+					onChange={formik.handleChange}
+				>
+					<MenuItem value="male">Male</MenuItem>
+					<MenuItem value="female">Female</MenuItem>
+				</Select>
+			</Box>
 			<FormHelperText
 				className={classes.helper}
 				error={true}
@@ -179,17 +182,54 @@ export const SignUpFormView = ({ formik, errors, isLoading }) => {
 			<TextField
 				color="secondary"
 				name="password"
-				type="password"
+				type={inputType}
 				value={formik.values.password}
 				onChange={formik.handleChange}
 				fullWidth={true}
+				InputProps={{
+					endAdornment: (
+						<InputAdornment position="end">
+							<IconButton
+								aria-label="toggle password visibility"
+								onClick={handleChangeInputType}
+								edge="end"
+							>
+								{inputType === "password" ? (
+									<VisibilityOffIcon />
+								) : (
+									<VisibilityIcon />
+								)}
+							</IconButton>
+						</InputAdornment>
+					),
+				}}
 			/>
 			<FormHelperText
 				className={classes.helper}
 				error={true}
 				sx={{ marginBottom: "20px" }}
 			>
-				{formik.touched.password && formik.errors.password}
+				{formik.errors.password}
+			</FormHelperText>
+			<label className={classes.label}>
+				Confirm password<span className={classes.required}>*</span>
+			</label>
+
+			<TextField
+				color="secondary"
+				name="confirmPassword"
+				type="password"
+				value={formik.values.confirmPassword}
+				onChange={formik.handleChange}
+				fullWidth={true}
+			/>
+
+			<FormHelperText
+				className={classes.helper}
+				error={true}
+				sx={{ marginBottom: "20px" }}
+			>
+				{formik.errors.confirmPassword}
 			</FormHelperText>
 			{errors ? (
 				<FormHelperText
@@ -222,7 +262,7 @@ export const SignUpFormView = ({ formik, errors, isLoading }) => {
 SignUpFormView.propTypes = {
 	formik: PropTypes.object.isRequired,
 	isLoading: PropTypes.bool,
-	errors: PropTypes.any
+	errors: PropTypes.any,
+	handleChangeInputType: PropTypes.func,
+	inputType: PropTypes.string
 };
-
-

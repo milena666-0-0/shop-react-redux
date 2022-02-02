@@ -66,7 +66,7 @@ export const LogInFormView = ({ formik, errors, isLoading }) => {
 			/>
 			<Box>
 				<span>
-					New user?{" "}
+					Haven't got an account yet?{" "}
 					<span>
 						<Link className={classes.link} to="/signup">
 							Sign up

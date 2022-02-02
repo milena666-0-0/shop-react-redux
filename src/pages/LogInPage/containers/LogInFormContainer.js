@@ -24,7 +24,6 @@ export const LogInFormContainer = () => {
 		password: yup
 			.string()
 			.typeError("Should be a string")
-
 			.required("Enter the password"),
 	});
 
