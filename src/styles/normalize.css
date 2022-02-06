@@ -9,3 +9,8 @@
 body {
     font-family: 'Rubik';
 }
+
+a {
+    text-decoration: none;
+    color: #000;
+}

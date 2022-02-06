@@ -1,4 +1,7 @@
-export const styles = (theme) => ({
+import { makeStyles } from "@mui/styles";
+
+
+const styles = (theme) => ({
 	form: {
 		maxWidth: "500px",
 		width: "100%",
@@ -38,3 +41,6 @@ export const styles = (theme) => ({
         marginBottom: '20px'
     }
 });
+
+export const useStyles = makeStyles(styles);
+

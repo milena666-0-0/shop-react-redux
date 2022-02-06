@@ -5,19 +5,19 @@ import { HeaderLayout } from "../components/HeaderLayout";
 export const HeaderContainer = () => {
 	const [anchorEl, setAnchorEl] = useState(null);
 
-	const handleMenu = (event) => {
+	const handleOpenMenu = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
 
-	const handleClose = () => {
+	const handleCloseMenu = () => {
 		setAnchorEl(null);
 	};
 
 	return (
 		<HeaderLayout
 			anchorEl={anchorEl}
-			handleMenu={handleMenu}
-			handleClose={handleClose}
+			handleOpenMenu={handleOpenMenu}
+			handleCloseMenu={handleCloseMenu}
 		/>
 	);
 };

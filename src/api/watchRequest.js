@@ -19,8 +19,9 @@ function* watchRequestWorker(action) {
 			)
 		);
 	} catch (e) {
-
-		yield put(createActionWithPostfix(action, REQUEST_POSTFIXES.FAIL, e.message));
+		yield put(
+			createActionWithPostfix(action, REQUEST_POSTFIXES.FAIL, e.message)
+		);
 	}
 }
 

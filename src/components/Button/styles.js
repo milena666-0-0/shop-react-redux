@@ -1,4 +1,6 @@
-export const styles = (theme) => ({
+import { makeStyles } from "@mui/styles";
+
+const styles = (theme) => ({
 	button: {
 		backgroundColor: theme.palette.secondary.main,
 		borderRadius: "2px",
@@ -24,7 +26,7 @@ export const styles = (theme) => ({
 		},
 
 	},
-	disbledButton: {
+	disabledButton: {
 		opacity: "0.5",
 		cursor: "not-allowed",
 		display: "flex",
@@ -32,3 +34,6 @@ export const styles = (theme) => ({
 		justifyContent: "center",
 	},
 });
+
+export const useStyles = makeStyles(styles);
+

@@ -7,9 +7,10 @@ import {
 	InputAdornment,
 	IconButton,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import {
+	Visibility as VisibilityIcon,
+	VisibilityOff as VisibilityOffIcon,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -17,9 +18,7 @@ import { Button } from "../../../components/Button/index";
 import { isSubmitButtonDisabled } from "../../../utils/isSubmitButtonDisabled";
 import { Spinner } from "../../../components/Spinner/index";
 
-import { styles } from "./styles";
-
-const useStyles = makeStyles(styles);
+import { useStyles } from "./styles";
 
 export const SignUpFormView = ({
 	formik,
@@ -29,7 +28,7 @@ export const SignUpFormView = ({
 	inputType,
 }) => {
 	const classes = useStyles();
-	const disabled = !isSubmitButtonDisabled(formik) || isLoading;
+	const isDisabled = !isSubmitButtonDisabled(formik) || isLoading;
 
 	return (
 		<form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -123,7 +122,7 @@ export const SignUpFormView = ({
 			<TextField
 				color="secondary"
 				name="phone"
-				type="phone"
+				type="tel"
 				value={formik.values.phone}
 				onChange={formik.handleChange}
 				fullWidth={true}
@@ -241,7 +240,7 @@ export const SignUpFormView = ({
 				</FormHelperText>
 			) : null}
 			<Button
-				disabled={disabled}
+				disabled={isDisabled}
 				label={isLoading ? <Spinner /> : "Sign in"}
 				classname={classes.signUpBtn}
 			/>
@@ -264,5 +263,5 @@ SignUpFormView.propTypes = {
 	isLoading: PropTypes.bool,
 	errors: PropTypes.any,
 	handleChangeInputType: PropTypes.func,
-	inputType: PropTypes.string
+	inputType: PropTypes.string,
 };

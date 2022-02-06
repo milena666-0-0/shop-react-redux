@@ -1,4 +1,4 @@
-import React from "react";
+import {StrictMode} from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { configureStore } from "./store/configureStore";
@@ -20,7 +20,7 @@ const store = configureStore();
 // const persistor = persistStore(store);
 
 ReactDOM.render(
-	<React.StrictMode>
+	<StrictMode>
 		<BrowserRouter>
 			<Provider store={store}>
 				<ThemeProvider theme={theme}>
@@ -34,6 +34,6 @@ ReactDOM.render(
 				</ThemeProvider>
 			</Provider>
 		</BrowserRouter>
-	</React.StrictMode>,
+	</StrictMode>,
 	document.getElementById("root")
 );

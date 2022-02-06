@@ -1,4 +1,6 @@
-export const styles = (theme) => ({
+import { makeStyles } from "@mui/styles";
+
+const styles = (theme) => ({
 	container: {
 		display: "flex",
 		justifyContent: "space-between",
@@ -31,5 +33,14 @@ export const styles = (theme) => ({
 		width: '1.5px',
 		backgroundColor: theme.palette.secondary.main,
 	},
-	
+	navLinks: {
+		color: theme.palette.secondary.main,
+		marginRight: '10px',
+		'&:last-child': {
+			marginRight: 0
+		}
+	},
 });
+
+export const useStyles = makeStyles(styles);
+
