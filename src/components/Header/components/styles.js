@@ -36,6 +36,8 @@ const styles = (theme) => ({
 	navLinks: {
 		color: theme.palette.secondary.main,
 		marginRight: '10px',
+		fontWeight: 500,
+		cursor: 'pointer',
 		'&:last-child': {
 			marginRight: 0
 		}

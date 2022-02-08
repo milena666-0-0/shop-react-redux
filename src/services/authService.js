@@ -16,6 +16,11 @@ class AuthService {
 
 		return api.post("/auth/signIn", authData);
 	};
+
+	logOut() {
+		localStorage.clear();
+		window.location.reload();
+	};
 };
 
 export default AuthService.instance;

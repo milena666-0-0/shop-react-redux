@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { ROUTE_NAMES } from "./routeNames";
 import { LogInFormContainer } from "../pages/LogInPage/containers/LogInFormContainer";
 import { SignUpFormContainer } from "../pages/SignUpPage/containers/SignUpFormContainer";
-import { ProductsContainer } from "../pages/HomePage/containers/ProductsContainer";
+import { ProductsContainer } from "../pages/ProductsPage/containers/ProductsContainer";
 import { PrivateRoute } from "./PrivateRoute";
 
 export const Router = () => {
