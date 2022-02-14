@@ -1,23 +1,25 @@
+import { useMemo } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert as MoreIcon } from "@mui/icons-material";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { authSelector } from "../../../../pages/LogInPage/selectors/index";
 import { headerUnauthMenuListData } from "../../config/headerUnauthMenuList";
 import { headerAuthMenuListData } from "../../config/headerAuthMenuList";
+import { useAuth } from "../../../../hooks/useAuth";
 
 export const HeaderMenuLayout = ({
 	handleOpenMenu,
 	anchorEl,
 	handleCloseMenu,
+	handleLogOut,
 }) => {
-	const { isAuth } = useSelector(authSelector);
+	const { isAuth } = useAuth();
 
-	const menuListToMap = isAuth
-		? headerAuthMenuListData
-		: headerUnauthMenuListData;
+	const menuListToMap = useMemo(
+		() => (isAuth ? headerAuthMenuListData : headerUnauthMenuListData),
+		[isAuth]
+	);
 
 	return (
 		<Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -50,6 +52,5 @@ export const HeaderMenuLayout = ({
 HeaderMenuLayout.propTypes = {
 	handleOpenMenu: PropTypes.func,
 	handleCloseMenu: PropTypes.func,
-	anchorEl: PropTypes.bool
+	anchorEl: PropTypes.bool,
 };
-

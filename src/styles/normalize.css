@@ -1,26 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Rubik:wght@400;500;600;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	overflow-x: hidden;
+	margin-right: calc(-1 * (100vw - 100%));
 }
 
 body {
-    font-family: 'Rubik';
+	font-family: "Rubik";
 }
 
 a {
-    text-decoration: none;
-    color: #000;
+	text-decoration: none;
+	color: #000;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
+input[type="number"] {
+	-moz-appearance: textfield;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Box } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +15,11 @@ export const SignUpFormContainer = () => {
 
 	const { errors, isLoading } = useSelector(signUpSelector);
 
-	const handleChangeInputType = () => {
+	const handleChangeInputType = useCallback(() => {
 		const newInputType = inputType === "password" ? "text" : "password";
+		
 		setInputType(newInputType);
-	};
+	}, [inputType]);
 
 	const formik = useFormik({
 		initialValues: {

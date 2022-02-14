@@ -1,19 +1,24 @@
-import {memo} from 'react';
+import { memo } from "react";
 import { Box } from "@mui/material";
 import { PropTypes } from "prop-types";
 
 import { ProductsCardView } from "../../../components/ProductsCard/ProductsCardView";
 import { SquareSpinner } from "../../../components/Spinners/SquareSpinner/index";
 import { ErrorIndicator } from "../../../components/Errors/ErrorIndicator";
+import { useRequestIndicatoors } from "../../../hooks/useRequestIndicatoors";
+import { productsSelector } from "../selectors/index";
 
 import { useStyles } from "./styles";
 
-export const ProductsLayout = memo(({ productsList, isLoading, errors }) => {
+export const ProductsLayout = memo(({ productsList }) => {
 	const classes = useStyles();
 
-	const content = productsList.length && !(isLoading || errors);
-	const spinner = isLoading && !errors && <SquareSpinner />;
-	const error = errors && <ErrorIndicator /> ;
+	const { content, spinner, error } = useRequestIndicatoors(
+		productsSelector,
+		productsList,
+		SquareSpinner,
+		ErrorIndicator
+	);
 
 	return (
 		<Box
@@ -25,11 +30,13 @@ export const ProductsLayout = memo(({ productsList, isLoading, errors }) => {
 				},
 			}}
 		>
-			{content
-				? productsList.map((productsItem) => (
-						<ProductsCardView key={productsItem.id} card={productsItem} />
-				  ))
-				: null}
+			{content &&
+				productsList.map((productsItem) => (
+					<ProductsCardView
+						key={productsItem.id}
+						card={productsItem}
+					/>
+				))}
 			{spinner}
 			{error}
 		</Box>
@@ -38,6 +45,4 @@ export const ProductsLayout = memo(({ productsList, isLoading, errors }) => {
 
 ProductsLayout.propTypes = {
 	productsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-	isLoading: PropTypes.bool,
-	errors: PropTypes.any,
 };

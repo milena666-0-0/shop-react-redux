@@ -10,6 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { SignUpFormContainer } from "./pages/SignUpPage/containers/SignUpFormContainer";
 import { LogInFormContainer } from "./pages/LogInPage/containers/LogInFormContainer";
 import { ProductsContainer } from "./pages/ProductsPage/containers/ProductsContainer";
+import { PokemonsDetailsContainer } from "./pages/PokemonsDetailsPage/containers/PokemonsDetailsContainer";
 import { MainLayout } from "./components/MainLayout/index";
 import { Router } from "./routes/Router";
 import { theme } from "./static/theme/index";
@@ -30,6 +31,7 @@ ReactDOM.render(
 								<ProductsContainer />
 								<SignUpFormContainer />
 								<LogInFormContainer />
+								<PokemonsDetailsContainer />
 							</Router>
 						</MainLayout>
 					</ThemeProvider>

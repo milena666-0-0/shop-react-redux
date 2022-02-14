@@ -81,6 +81,7 @@ export const HeaderLayout = ({
 						handleOpenMenu={handleOpenMenu}
 						anchorEl={anchorEl}
 						handleCloseMenu={handleCloseMenu}
+						handleLogOut={handleLogOut}
 					/>
 				</Box>
 			</Container>

@@ -5,13 +5,13 @@ import {
 	Typography,
 	Button,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+
+import {ROUTE_NAMES} from '../../routes/routeNames';
 
 import { useStyles } from "./styles";
 
-export const ProductsCardView = ({
-	renderData,
-	card,
-}) => {
+export const ProductsCardView = ({ renderData, card }) => {
 	const classes = useStyles();
 	const { id, name, price, image } = card;
 	return (
@@ -28,9 +28,11 @@ export const ProductsCardView = ({
 				</Typography>
 			</CardContent>
 			<CardActions>
-				<Button color="secondary" size="small">
-					Learn More
-				</Button>
+				<Link to={`${ROUTE_NAMES.PRODUCTS}/${id}`}>
+					<Button color="secondary" size="small">
+						Learn More
+					</Button>
+				</Link>
 				<Button color="secondary" size="small">
 					Add to cart
 				</Button>
