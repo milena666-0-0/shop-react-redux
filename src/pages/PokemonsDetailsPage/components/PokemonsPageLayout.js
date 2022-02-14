@@ -43,10 +43,14 @@ export const PokemonsPageLayout = ({ pokemonData }) => {
 							{price}$
 						</Grid>
 						<Grid item md={12}>
+
 							<PokemonsPageAbilitiesView abilities={abilities} />
+
 						</Grid>
 						<Grid item xs={12} sm={8} md={8}>
+
 							<PokemonsPageStatsView stats={stats} />
+
 						</Grid>
 					</Grid>
 				</Paper>
