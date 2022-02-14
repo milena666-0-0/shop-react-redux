@@ -21,7 +21,7 @@ export const Button = ({ label, img = null, classname, disabled }) => {
 };
 
 Button.propTypes = {
-	label: PropTypes.string,
-	classname: PropTypes.string.isRequired,
-	disabled: PropTypes.bool.isRequired,
+	label: PropTypes.any,
+	classname: PropTypes.string,
+	disabled: PropTypes.bool,
 };

@@ -1,24 +1,23 @@
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert as MoreIcon } from "@mui/icons-material";
 import { useSelector } from "react-redux";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import { authSelector } from "../../../../pages/LogInPage/selectors/index";
-import { headerMenuListData } from "../../config/headerMenuList";
+import { headerUnauthMenuListData } from "../../config/headerUnauthMenuList";
+import { headerAuthMenuListData } from "../../config/headerAuthMenuList";
 
 export const HeaderMenuLayout = ({
 	handleOpenMenu,
 	anchorEl,
 	handleCloseMenu,
 }) => {
-
 	const { isAuth } = useSelector(authSelector);
 
-	const menuList = headerMenuListData.map((listItem) => {
-		return isAuth && listItem.label === "Log in"
-			? { ...listItem, label: "Profile" }
-			: listItem;
-	});
+	const menuListToMap = isAuth
+		? headerAuthMenuListData
+		: headerUnauthMenuListData;
 
 	return (
 		<Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -38,7 +37,7 @@ export const HeaderMenuLayout = ({
 				open={Boolean(anchorEl)}
 				onClose={handleCloseMenu}
 			>
-				{menuList.map(({ label, pathTo }) => (
+				{menuListToMap.map(({ label, pathTo }) => (
 					<MenuItem key={label} onClick={handleCloseMenu}>
 						<Link to={pathTo}>{label}</Link>
 					</MenuItem>
@@ -47,3 +46,10 @@ export const HeaderMenuLayout = ({
 		</Box>
 	);
 };
+
+HeaderMenuLayout.propTypes = {
+	handleOpenMenu: PropTypes.func,
+	handleCloseMenu: PropTypes.func,
+	anchorEl: PropTypes.bool
+};
+

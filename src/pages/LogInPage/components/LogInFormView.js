@@ -1,13 +1,15 @@
+import { memo } from "react";
 import { Box, TextField, FormHelperText } from "@mui/material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Button } from "../../../components/Button/index";
 import { isSubmitButtonDisabled } from "../../../utils/isSubmitButtonDisabled";
-import { Spinner } from "../../../components/Spinner/index";
+import { DefaultSpinner } from "../../../components/Spinners/DefaultSpinner/index";
+
 import { useStyles } from "./styles";
 
-export const LogInFormView = ({ formik, errors, isLoading }) => {
+export const LogInFormView = memo(({ formik, errors, isLoading }) => {
 	const classes = useStyles();
 	const isDisabled = !isSubmitButtonDisabled(formik) || isLoading;
 
@@ -55,7 +57,7 @@ export const LogInFormView = ({ formik, errors, isLoading }) => {
 
 			<Button
 				disabled={isDisabled}
-				label={isLoading ? <Spinner /> : "Log in"}
+				label={isLoading ? <DefaultSpinner /> : "Log in"}
 				classname={classes.signUpBtn}
 			/>
 			<Box>
@@ -70,7 +72,7 @@ export const LogInFormView = ({ formik, errors, isLoading }) => {
 			</Box>
 		</form>
 	);
-};
+});
 
 LogInFormView.propTypes = {
 	formik: PropTypes.object.isRequired,

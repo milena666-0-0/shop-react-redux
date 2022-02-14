@@ -17,6 +17,7 @@ export const theme = createTheme({
 		fontWeightBold: 700,
 	},
 	components: {
+		
 		MuiContainer: {
 			styleOverrides: {
 				root: {
@@ -36,9 +37,7 @@ export const theme = createTheme({
 			styleOverrides: {
 				badge: {
 					color: "#fff",
-					minWidth: "15px",
-					height: "15px",
-					fontSize: "0.5rem",
+					fontSize: "0.6rem",
 				},
 			},
 		},
@@ -47,10 +46,14 @@ export const theme = createTheme({
 				root: {
 					boxShadow: "none",
 					maxWidth: "270px",
-					transition: "all .3s",
-					marginBottom: "45px",
+					transition: "all .2s",
+					margin: "20px 25px 20px 0",
+					border: '1px solid #fff',
 					"&:hover": {
 						border: "1px solid #7AC751",
+					},
+					"&:last-child": {
+					    marginRight: 0
 					},
 				},
 			},
@@ -59,15 +62,6 @@ export const theme = createTheme({
 			styleOverrides: {
 				root: {
 					paddingBottom: 0,
-				},
-			},
-		},
-		MuiCardMedia: {
-			styleOverrides: {
-				root: {
-					obJectFit: "contain",
-					maxHeight: "280px",
-					height: "100%",
 				},
 			},
 		},
@@ -93,5 +87,6 @@ export const theme = createTheme({
 				},
 			},
 		},
+		
 	},
 });

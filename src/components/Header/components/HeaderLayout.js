@@ -9,31 +9,28 @@ import {
 	Divider,
 } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
-// import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
 
-import { HeaderNavView } from "./HeaderNav/HeaderNavView";
-import { headerNavData } from "../config/headerNav";
 import { HeaderMenuLayout } from "./HeaderMenu/HeaderMenuLayout";
-// import { authSelector } from "../../../pages/LogInPage/selectors/index";
+import { HeaderNavLayout } from "./HeaderNav/HeaderNavLayout";
 
 import { useStyles } from "./styles";
 
 import account from "../../../static/imgs/account.svg";
 import basket from "../../../static/imgs/basket.svg";
 
-export const HeaderLayout = ({ handleOpenMenu, anchorEl, handleCloseMenu }) => {
+export const HeaderLayout = ({
+	handleOpenMenu,
+	anchorEl,
+	handleCloseMenu,
+	handleLogOut,
+}) => {
 	const classes = useStyles();
 
 	return (
 		<AppBar>
 			<Container>
 				<Box className={classes.container}>
-					<Box sx={{ display: "flex", alignItems: "center" }}>
-						{headerNavData.map(({ label, pathTo }) => (
-							<HeaderNavView key={label} label={label} pathTo={pathTo} />
-						))}
-					</Box>
+					<HeaderNavLayout handleLogOut={handleLogOut} />
 					<Box className={classes.search}>
 						<Box className={classes.searchWrap}>
 							<InputBase
