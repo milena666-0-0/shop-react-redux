@@ -6,6 +6,7 @@ import {createBlacklistFilter } from 'redux-persist-transform-filter';
 import {signUpReducer} from '../pages/SignUpPage/reducers/index';
 import {signInReducer} from '../pages/LogInPage/reducers/index';
 import {productsReducer} from '../pages/ProductsPage/reducers/index';
+import {pokemonDetailsReducer} from '../pages/PokemonsDetailsPage/reducers/index';
 
 const authBlackListedFields = createBlacklistFilter('signIn', ['isLoading', 'errors']);
 
@@ -19,7 +20,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
     signUp: signUpReducer,
     signIn: signInReducer,
-    products: productsReducer
+    products: productsReducer,
+    pokemonDetails: pokemonDetailsReducer
 });
 
 export default persistReducer(persistConfig, rootReducer)

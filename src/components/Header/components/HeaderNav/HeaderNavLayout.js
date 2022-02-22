@@ -1,20 +1,23 @@
-import { useSelector } from "react-redux";
+import { useMemo } from "react";
 import { Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import { headerNavUnauthData } from "../../config/headerUnauthNav";
 import { headerNavAuthData } from "../../config/headerAuthNav";
-import { authSelector } from "../../../../pages/LogInPage/selectors/index";
+import { useAuth } from "../../../../hooks/useAuth";
 
 import { useStyles } from "../styles";
 
-export const HeaderNavLayout = ({handleLogOut}) => {
+export const HeaderNavLayout = ({ handleLogOut }) => {
 	const classes = useStyles();
 
-	const { isAuth } = useSelector(authSelector);
+	const { isAuth } = useAuth();
 
-	const navListToMap = isAuth ? headerNavAuthData : headerNavUnauthData;
+	const navListToMap = useMemo(
+		() => (isAuth ? headerNavAuthData : headerNavUnauthData),
+		[isAuth]
+	);
 
 	return (
 		<Box
@@ -38,5 +41,5 @@ export const HeaderNavLayout = ({handleLogOut}) => {
 };
 
 HeaderNavLayout.propTypes = {
-	handleLogOut: PropTypes.func
+	handleLogOut: PropTypes.func,
 };

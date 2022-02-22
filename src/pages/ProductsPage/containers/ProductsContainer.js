@@ -20,11 +20,7 @@ export const ProductsContainer = () => {
 
 	return (
 		<>
-			<ProductsLayout
-				isLoading={isLoading}
-				errors={errors}
-				productsList={productsData}
-			/>
+			<ProductsLayout productsList={productsData} />
 			<PaginationView
 				isLoading={isLoading}
 				errors={errors}

@@ -1,24 +1,33 @@
 import { Routes, Route } from "react-router-dom";
 
-import { ROUTE_NAMES } from "./routeNames";
-import { LogInFormContainer } from "../pages/LogInPage/containers/LogInFormContainer";
-import { SignUpFormContainer } from "../pages/SignUpPage/containers/SignUpFormContainer";
-import { ProductsContainer } from "../pages/ProductsPage/containers/ProductsContainer";
+import { pagesForRouting } from "../config/pagesForRouting";
 import { PrivateRoute } from "./PrivateRoute";
 
 export const Router = () => {
 	return (
 		<Routes>
-			<Route path={ROUTE_NAMES.LOG_IN} element={<LogInFormContainer />} />
-			<Route path={ROUTE_NAMES.SIGN_UP} element={<SignUpFormContainer />} />
-			<Route
-				path={ROUTE_NAMES.PRODUCTS}
-				element={
-					<PrivateRoute>
-						<ProductsContainer />
-					</PrivateRoute>
+			{pagesForRouting.map(({ routePath, Component, isPrivate }) => {
+				if (isPrivate) {
+					return (
+						<Route
+							key={routePath}
+							path={routePath}
+							element={
+								<PrivateRoute>
+									<Component />
+								</PrivateRoute>
+							}
+						/>
+					);
 				}
-			/>
+				return (
+					<Route
+						key={routePath}
+						path={routePath}
+						element={<Component />}
+					/>
+				);
+			})}
 		</Routes>
 	);
 };

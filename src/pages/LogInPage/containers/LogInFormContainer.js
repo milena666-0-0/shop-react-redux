@@ -35,7 +35,11 @@ export const LogInFormContainer = () => {
 
 	return (
 		<Box>
-			<LogInFormView isLoading={isLoading} errors={errors} formik={formik} />
+			<LogInFormView
+				isLoading={isLoading}
+				errors={errors}
+				formik={formik}
+			/>
 		</Box>
 	);
 };
