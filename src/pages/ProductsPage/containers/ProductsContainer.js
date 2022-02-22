@@ -6,6 +6,7 @@ import { productsSelector } from "../selectors/index";
 import { ProductsLayout } from "../components/ProductsLayout";
 import { PaginationView } from "../../../components/Pagination/PaginationView";
 import { usePagination } from "../../../hooks/usePagination";
+import { useCart } from "../../../hooks/useCart";
 
 export const ProductsContainer = () => {
 	const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export const ProductsContainer = () => {
 	const { productsData, isLoading, errors } = useSelector(productsSelector);
 
 	const [page, onPageChange] = usePagination("productsPage");
+	const { handleAddToCart } = useCart();
 
 	useEffect(() => {
 		dispatch(PRODUCTS_REQUEST(page));
@@ -20,7 +22,10 @@ export const ProductsContainer = () => {
 
 	return (
 		<>
-			<ProductsLayout productsList={productsData} />
+			<ProductsLayout
+				productsList={productsData}
+				handleAddToCart={handleAddToCart}
+			/>
 			<PaginationView
 				isLoading={isLoading}
 				errors={errors}

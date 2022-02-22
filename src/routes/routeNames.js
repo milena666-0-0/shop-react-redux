@@ -4,4 +4,5 @@ export const ROUTE_NAMES = {
 	PRODUCT_DETAILS: '/products/:productId',
 	SIGN_UP: "/signup",
 	LOG_IN: "/login",
+	CART: "/cart",
 };

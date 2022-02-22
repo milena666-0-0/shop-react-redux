@@ -9,7 +9,7 @@ export const PokemonsPageStatsView = ({ stats }) => {
 
 	return (
 		<Box className={classes.statsContainer}>
-			{stats.map((stat) => (
+			{stats && stats.map((stat) => (
 				<Box className={classes.stats} key={stat.title}>
 					<img src={statsImages[stat.title]} alt={stat.title} />
 					<div className={classes.statsValue}>{stat.value}</div>

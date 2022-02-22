@@ -11,6 +11,7 @@ import { SignUpFormContainer } from "./pages/SignUpPage/containers/SignUpFormCon
 import { LogInFormContainer } from "./pages/LogInPage/containers/LogInFormContainer";
 import { ProductsContainer } from "./pages/ProductsPage/containers/ProductsContainer";
 import { PokemonsDetailsContainer } from "./pages/PokemonsDetailsPage/containers/PokemonsDetailsContainer";
+import { CartContainer } from "./pages/Cart/containers/CartContainer";
 import { MainLayout } from "./components/MainLayout/index";
 import { Router } from "./routes/Router";
 import { theme } from "./static/theme/index";
@@ -32,6 +33,7 @@ ReactDOM.render(
 								<SignUpFormContainer />
 								<LogInFormContainer />
 								<PokemonsDetailsContainer />
+								<CartContainer/>
 							</Router>
 						</MainLayout>
 					</ThemeProvider>

@@ -10,7 +10,7 @@ import { productsSelector } from "../selectors/index";
 
 import { useStyles } from "./styles";
 
-export const ProductsLayout = memo(({ productsList }) => {
+export const ProductsLayout = memo(({ productsList, handleAddToCart }) => {
 	const classes = useStyles();
 
 	const { content, spinner, error } = useRequestIndicatoors(
@@ -33,6 +33,7 @@ export const ProductsLayout = memo(({ productsList }) => {
 			{content &&
 				productsList.map((productsItem) => (
 					<ProductsCardView
+						handleAddToCart={handleAddToCart}
 						key={productsItem.id}
 						card={productsItem}
 					/>

@@ -7,13 +7,24 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import {ROUTE_NAMES} from '../../routes/routeNames';
+import { ROUTE_NAMES } from "../../routes/routeNames";
+import { useCart } from "../../hooks/useCart";
 
 import { useStyles } from "./styles";
 
-export const ProductsCardView = ({ renderData, card }) => {
+export const ProductsCardView = ({ card, handleAddToCart }) => {
 	const classes = useStyles();
-	const { id, name, price, image } = card;
+
+	const { id, name, image, price } = card;
+
+	const { cart } = useCart();
+
+	const pokemonDataToAddToCart = { ...card, quantity: 1 };
+
+	const findpokemonInCart = cart.itemsList.find(
+		(pokemon) => pokemon.id === id
+	);
+
 	return (
 		<Card sx={{ flexGrow: 4 }}>
 			<img src={image} alt="pokemon" />
@@ -33,9 +44,21 @@ export const ProductsCardView = ({ renderData, card }) => {
 						Learn More
 					</Button>
 				</Link>
-				<Button color="secondary" size="small">
-					Add to cart
-				</Button>
+				{findpokemonInCart ? (
+					<Link to={ROUTE_NAMES.CART}>
+						<Button color="secondary" size="small">
+							Go to cart
+						</Button>
+					</Link>
+				) : (
+					<Button
+						onClick={() => handleAddToCart(pokemonDataToAddToCart)}
+						color="secondary"
+						size="small"
+					>
+						Add to cart
+					</Button>
+				)}
 			</CardActions>
 		</Card>
 	);

@@ -9,9 +9,11 @@ import {
 	Divider,
 } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 import { HeaderMenuLayout } from "./HeaderMenu/HeaderMenuLayout";
 import { HeaderNavLayout } from "./HeaderNav/HeaderNavLayout";
+import { ROUTE_NAMES } from "../../../routes/routeNames";
 
 import { useStyles } from "./styles";
 
@@ -23,6 +25,7 @@ export const HeaderLayout = ({
 	anchorEl,
 	handleCloseMenu,
 	handleLogOut,
+	cart,
 }) => {
 	const classes = useStyles();
 
@@ -53,21 +56,20 @@ export const HeaderLayout = ({
 						</Box>
 					</Box>
 					<Box sx={{ display: { xs: "none", md: "flex" } }}>
-						<IconButton
-							aria-label="account of current user"
-							aria-haspopup="true"
-						>
-							<Badge
-								className={classes.badge}
-								max={99}
-								badgeContent={9}
-								color="secondary"
-							>
-								<Icon>
-									<img src={basket} alt="basket" />
-								</Icon>
-							</Badge>
-						</IconButton>
+						<Link to={ROUTE_NAMES.CART}>
+							<IconButton>
+								<Badge
+									className={classes.badge}
+									max={99}
+									badgeContent={cart.quantity}
+									color="secondary"
+								>
+									<Icon>
+										<img src={basket} alt="basket" />
+									</Icon>
+								</Badge>
+							</IconButton>
+						</Link>
 						<IconButton
 							sx={{ marginLeft: "15px" }}
 							aria-label="show 4 new purchases"

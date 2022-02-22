@@ -1,4 +1,4 @@
-import { Paper, Grid } from "@mui/material";
+import { Paper, Grid, Button, Box } from "@mui/material";
 import PropTypes from "prop-types";
 
 import { PokemonsPageStatsView } from "./PokemonsPageStats/index";
@@ -40,17 +40,16 @@ export const PokemonsPageLayout = ({ pokemonData }) => {
 							<img src={image} alt={name} />
 						</Grid>
 						<Grid className={classes.price} item xs={6} md={4}>
-							{price}$
+							<Box sx={{ marginBottom: "10px" }}>{price}$</Box>
+							<Button color="secondary" size="small">
+								Add to cart
+							</Button>
 						</Grid>
 						<Grid item md={12}>
-
 							<PokemonsPageAbilitiesView abilities={abilities} />
-
 						</Grid>
 						<Grid item xs={12} sm={8} md={8}>
-
 							<PokemonsPageStatsView stats={stats} />
-
 						</Grid>
 					</Grid>
 				</Paper>
