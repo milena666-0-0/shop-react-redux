@@ -49,11 +49,11 @@ export const LogInFormView = memo(({ formik, errors, isLoading }) => {
 			>
 				{formik.touched.password && formik.errors.password}
 			</FormHelperText>
-			{errors ? (
+			{errors && (
 				<FormHelperText className={classes.helper} error={true}>
 					Incorrect password or email
 				</FormHelperText>
-			) : null}
+			)}
 
 			<Button
 				disabled={isDisabled}

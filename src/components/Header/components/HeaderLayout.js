@@ -46,11 +46,7 @@ export const HeaderLayout = ({
 								className={classes.divider}
 								orientation="vertical"
 							/>
-							<IconButton
-								color="secondary"
-								type="submit"
-								aria-label="search"
-							>
+							<IconButton color="secondary" type="submit">
 								<SearchIcon />
 							</IconButton>
 						</Box>
@@ -70,10 +66,7 @@ export const HeaderLayout = ({
 								</Badge>
 							</IconButton>
 						</Link>
-						<IconButton
-							sx={{ marginLeft: "15px" }}
-							aria-label="show 4 new purchases"
-						>
+						<IconButton sx={{ marginLeft: "15px" }}>
 							<Icon>
 								<img src={account} alt="account" />
 							</Icon>

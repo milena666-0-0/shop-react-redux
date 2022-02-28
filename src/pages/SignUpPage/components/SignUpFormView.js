@@ -200,6 +200,7 @@ export const SignUpFormView = memo(
 						),
 					}}
 				/>
+				
 				<FormHelperText
 					className={classes.helper}
 					error={true}
@@ -207,6 +208,7 @@ export const SignUpFormView = memo(
 				>
 					{formik.errors.password}
 				</FormHelperText>
+
 				<label className={classes.label}>
 					Confirm password<span className={classes.required}>*</span>
 				</label>
@@ -227,7 +229,7 @@ export const SignUpFormView = memo(
 				>
 					{formik.errors.confirmPassword}
 				</FormHelperText>
-				{errors ? (
+				{errors && (
 					<FormHelperText
 						className={classes.helper}
 						error={true}
@@ -235,7 +237,7 @@ export const SignUpFormView = memo(
 					>
 						Account with this email has already been existed
 					</FormHelperText>
-				) : null}
+				)}
 				<Button
 					disabled={isDisabled}
 					label={isLoading ? <DefaultSpinner /> : "Sign in"}

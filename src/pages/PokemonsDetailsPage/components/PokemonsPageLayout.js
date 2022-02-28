@@ -1,30 +1,37 @@
 import { Paper, Grid, Button, Box } from "@mui/material";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import { PokemonsPageStatsView } from "./PokemonsPageStats/index";
 import { PokemonsPageAbilitiesView } from "./PokemonsPageAbilities/index";
 import { SquareSpinner } from "../../../components/Spinners/SquareSpinner/index";
 import { ErrorIndicator } from "../../../components/Errors/ErrorIndicator";
-import { useRequestIndicatoors } from "../../../hooks/useRequestIndicatoors";
-import { pokemonDetailsSelector } from "../selectors/index";
+import { ROUTE_NAMES } from "../../../routes/routeNames";
 
 import { useStyles } from "./styles";
 
-export const PokemonsPageLayout = ({ pokemonData }) => {
+export const PokemonsPageLayout = ({
+	pokemonData,
+	cart,
+	contentToShow,
+	spinnerToShow,
+	errorToShow,
+	handleSnackbarOpen,
+	handleAddToCart,
+}) => {
 	const classes = useStyles();
 
-	const { name, stats, abilities, image, price } = pokemonData;
+	const { name, stats, abilities, image, price, id } = pokemonData;
 
-	const { content, error, spinner } = useRequestIndicatoors(
-		pokemonDetailsSelector,
-		pokemonData,
-		SquareSpinner,
-		ErrorIndicator
+	const findpokemonInCart = cart.itemsList.find(
+		(pokemon) => pokemon.id === id
 	);
+
+	const pokemonDataToAddToCart = { id, name, image, price, quantity: 1 };
 
 	return (
 		<>
-			{content && (
+			{contentToShow && (
 				<Paper className={classes.cardContainer} variant="outlined">
 					<Grid container sx={{ alignItems: "center" }}>
 						<Grid
@@ -41,9 +48,24 @@ export const PokemonsPageLayout = ({ pokemonData }) => {
 						</Grid>
 						<Grid className={classes.price} item xs={6} md={4}>
 							<Box sx={{ marginBottom: "10px" }}>{price}$</Box>
-							<Button color="secondary" size="small">
-								Add to cart
-							</Button>
+							{findpokemonInCart ? (
+								<Link to={ROUTE_NAMES.CART}>
+									<Button color="secondary" size="small">
+										Go to cart
+									</Button>
+								</Link>
+							) : (
+								<Button
+									onClick={() => {
+										handleSnackbarOpen();
+										handleAddToCart(pokemonDataToAddToCart);
+									}}
+									color="secondary"
+									size="small"
+								>
+									Add to cart
+								</Button>
+							)}
 						</Grid>
 						<Grid item md={12}>
 							<PokemonsPageAbilitiesView abilities={abilities} />
@@ -54,8 +76,8 @@ export const PokemonsPageLayout = ({ pokemonData }) => {
 					</Grid>
 				</Paper>
 			)}
-			{error}
-			{spinner}
+			{spinnerToShow && <SquareSpinner />}
+			{errorToShow && <ErrorIndicator />}
 		</>
 	);
 };

@@ -1,6 +1,5 @@
 import {
 	Box,
-	Checkbox,
 	TableHead,
 	Table,
 	TableCell,
@@ -32,19 +31,13 @@ export const CartLayout = ({ cart, handleDeleteFromCart }) => {
 					>
 						<TableHead>
 							<TableRow>
-								<TableCell padding="checkbox">
-									<Checkbox
-										color="secondary"
-										defaultChecked
-									/>
-								</TableCell>
 								<TableCell>Items</TableCell>
 								<TableCell>Price</TableCell>
 								<TableCell padding="none" />
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{itemsList
+							{itemsList.length
 								? itemsList.map((item) => (
 										<CartItemView
 											key={item.id}
@@ -58,6 +51,7 @@ export const CartLayout = ({ cart, handleDeleteFromCart }) => {
 						</TableBody>
 					</Table>
 				</Grid>
+
 				<Grid>
 					<Box className={classes.orderContainer}>
 						<Box className={classes.orderInfoContainer}>
@@ -68,7 +62,7 @@ export const CartLayout = ({ cart, handleDeleteFromCart }) => {
 							<span>Items</span>
 							<span>{quantity}</span>
 						</Box>
-						<Button classname={classes.button} label="Order"/>
+						<Button classname={classes.button} label="Order" />
 					</Box>
 				</Grid>
 			</Grid>

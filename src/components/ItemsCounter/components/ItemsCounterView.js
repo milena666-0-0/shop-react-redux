@@ -15,7 +15,7 @@ export const ItemsCounterView = ({
 			<Button
 				className={classes.button}
 				onClick={handleItemQuantityDec}
-				disabled={itemQuantity <= 1}
+				disabled={itemQuantity < 1}
 				variant="outlined"
 				color="success"
 			>

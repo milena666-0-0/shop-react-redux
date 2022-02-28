@@ -1,12 +1,11 @@
-import { memo } from "react";
-import { Checkbox, TableCell, TableRow, IconButton, Box } from "@mui/material";
+import { TableCell, TableRow, IconButton, Box } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 
 import { ItemsCounterContainer } from "../../../../components/ItemsCounter/containers/ItemsCounterContainer";
 
 import { useStyles } from "./styles";
 
-export const CartItemView = memo(({ cartItem, handleDeleteFromCart }) => {
+export const CartItemView = ({ cartItem, handleDeleteFromCart }) => {
 	const classes = useStyles();
 
 	const { id, name, price, image, quantity } = cartItem;
@@ -19,9 +18,6 @@ export const CartItemView = memo(({ cartItem, handleDeleteFromCart }) => {
 				},
 			}}
 		>
-			<TableCell padding="checkbox" component="th" scope="row">
-				<Checkbox color="secondary" defaultChecked />
-			</TableCell>
 			<TableCell component="th" scope="row">
 				<Box className={classes.flexContainer}>
 					<img src={image} alt="pokemon" />
@@ -41,4 +37,4 @@ export const CartItemView = memo(({ cartItem, handleDeleteFromCart }) => {
 			</TableCell>
 		</TableRow>
 	);
-});
+};

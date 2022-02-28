@@ -30,7 +30,7 @@ export const LogInFormContainer = () => {
 	useEffect(() => {
 		if (isAuth) {
 			navigate(ROUTE_NAMES.PRODUCTS);
-		}
+		};
 	}, [isAuth]);
 
 	return (

@@ -1,110 +1,68 @@
-import { handleActions } from "redux-actions";
+import { handleActions, combineActions } from "redux-actions";
 import { cloneDeep } from "lodash";
 
 import * as actions from "../actions/index";
 
 const defaultState = {
-	cart: {},
+	itemsList: [],
+	quantity: 0,
+	totalPrice: 0,
 	isLoading: false,
 	errors: null,
 };
 
 export const cartReducer = handleActions(
 	{
-		[actions.CART_REQUEST]: (state) => {
+		[combineActions(
+			actions.CART_REQUEST,
+			actions.ADD_TO_CART_REQUEST,
+			actions.REMOVE_FROM_CART_REQUEST,
+			actions.UPDATE_QUANTITY_REQUEST
+		)]: (state) => {
 			return {
 				...state,
 				isLoading: true,
 				errors: null,
 			};
 		},
-		[actions.CART_SUCCESS]: (state, { payload }) => {
+		[combineActions(actions.CART_SUCCESS, actions.ADD_TO_CART_SUCCESS)]: (
+			state,
+			{ payload }
+		) => {
+			const { totalPrice, quantity, itemsList } = payload.response;
+
 			return {
 				...state,
-				cart: payload.response,
+				totalPrice,
+				quantity,
+				itemsList,
 				isLoading: false,
 				errors: null,
-			};
-		},
-		[actions.CART_FAIL]: (state, { payload }) => {
-			return {
-				...state,
-				isLoading: false,
-				errors: payload.response,
 			};
 		},
 
-		[actions.ADD_TO_CART_REQUEST]: (state) => {
-			return {
-				...state,
-				isLoading: true,
-				errors: null,
-			};
-		},
-		[actions.ADD_TO_CART_SUCCESS]: (state, { payload }) => {
-			return {
-				...state,
-				cart: payload.response,
-				isLoading: false,
-				errors: null,
-			};
-		},
-		[actions.ADD_TO_CART_FAIL]: (state, { payload }) => {
-			return {
-				...state,
-				isLoading: false,
-				errors: payload.response,
-			};
-		},
-
-		[actions.REMOVE_FROM_CART_REQUEST]: (state) => {
-			return {
-				...state,
-				isLoading: true,
-				errors: null,
-			};
-		},
 		[actions.REMOVE_FROM_CART_SUCCESS]: (state, { payload }) => {
-			const itemsListcopy = cloneDeep(state.cart.itemsList);
+			const { cartState, removedItemId } = payload.response;
 
-			const removedItemId = payload.response.removedItemId;
+			const itemsListcopy = cloneDeep(state.itemsList);
 
 			const updatedItemsList = itemsListcopy.filter(
 				(item) => item.id !== removedItemId
 			);
 
-			const updatedCart = {
-				...state.cart,
+			return {
+				...state,
+				...cartState,
 				itemsList: updatedItemsList,
-				...payload.response.cartState,
-			};
-
-			return {
-				...state,
-				cart: updatedCart,
 				isLoading: false,
 				errors: null,
 			};
 		},
-		[actions.REMOVE_FROM_CART_FAIL]: (state, { payload }) => {
-			return {
-				...state,
-				isLoading: false,
-				errors: payload.response,
-			};
-		},
 
-		[actions.UPDATE_QUANTITY_REQUEST]: (state) => {
-			return {
-				...state,
-				isLoading: true,
-				errors: null,
-			};
-		},
 		[actions.UPDATE_QUANTITY_SUCCESS]: (state, { payload }) => {
-			const itemsListCopy = cloneDeep(state.cart.itemsList);
+			const { updatedItem, cartState } = payload.response;
 
-			const updatedItem = payload.response.updatedItem;
+			const itemsListCopy = cloneDeep(state.itemsList);
 
 			const findUpdatedItem = itemsListCopy.find(
 				(item) => item.id === updatedItem.id
@@ -112,20 +70,21 @@ export const cartReducer = handleActions(
 
 			findUpdatedItem.quantity = updatedItem.quantity;
 
-			const updatedCart = {
-				...state.cart,
-				itemsList: itemsListCopy,
-				...payload.response.cartState,
-			};
-
 			return {
 				...state,
-				cart: updatedCart,
+				...cartState,
+				itemsList: itemsListCopy,
 				isLoading: false,
 				errors: null,
 			};
 		},
-		[actions.UPDATE_QUANTITY_FAIL]: (state, { payload }) => {
+
+		[combineActions(
+			actions.CART_FAIL,
+			actions.ADD_TO_CART_FAIL,
+			actions.REMOVE_FROM_CART_FAIL,
+			actions.UPDATE_QUANTITY_FAIL
+		)]: (state, { payload }) => {
 			return {
 				...state,
 				isLoading: false,

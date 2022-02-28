@@ -8,6 +8,7 @@ const styles = (theme) => ({
 	span: {
 		display: "inline-flex",
 		marginLeft: "15px",
+		minWidth: '55px'
 	},
 	
 });

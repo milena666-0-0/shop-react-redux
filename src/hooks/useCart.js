@@ -12,7 +12,7 @@ import {
 export const useCart = () => {
 	const dispatch = useDispatch();
 
-	const { cart } = useSelector(cartSelector);
+	const cart = useSelector(cartSelector);
 
 	const getCartData = useCallback(() => {
 		dispatch(CART_REQUEST());
@@ -34,7 +34,6 @@ export const useCart = () => {
 	const handleDeleteFromCart = useCallback((pokemonId) => {
 		dispatch(REMOVE_FROM_CART_REQUEST(pokemonId));
 	}, []);
-
 
 	return {
 		cart,
