@@ -17,3 +17,14 @@ export const UPDATE_QUANTITY_REQUEST = createAction("UPDATE_QUANTITY_REQUEST");
 export const UPDATE_QUANTITY_SUCCESS = createAction("UPDATE_QUANTITY_SUCCESS");
 export const UPDATE_QUANTITY_FAIL = createAction("UPDATE_QUANTITY_FAIL");
 
+
+export const MAKE_ORDER_REQUEST = createAction("MAKE_ORDER_REQUEST");
+export const MAKE_ORDER_SUCCESS = createAction("MAKE_ORDER_SUCCESS");
+export const MAKE_ORDER_FAIL = createAction("MAKE_ORDER_FAIL");
+
+
+export const GET_ORDERS_REQUEST = createAction("GET_ORDERS_REQUEST");
+export const GET_ORDERS_SUCCESS = createAction("GET_ORDERS_SUCCESS");
+export const GET_ORDERS_FAIL = createAction("GET_ORDERS_FAIL");
+
+

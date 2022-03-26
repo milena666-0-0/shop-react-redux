@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import { Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -9,7 +9,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 
 import { useStyles } from "../styles";
 
-export const HeaderNavLayout = ({ handleLogOut }) => {
+export const HeaderNavLayout = memo(({ handleLogOut }) => {
 	const classes = useStyles();
 
 	const { isAuth } = useAuth();
@@ -38,7 +38,7 @@ export const HeaderNavLayout = ({ handleLogOut }) => {
 			)}
 		</Box>
 	);
-};
+});
 
 HeaderNavLayout.propTypes = {
 	handleLogOut: PropTypes.func,

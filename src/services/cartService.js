@@ -18,6 +18,7 @@ class CartService {
 	updateItemQuantity({ id, quantity }) {
 		return api.patch(`/cart/item`, { id, quantity });
 	};
-};
+
+}
 
 export default CartService.instance;

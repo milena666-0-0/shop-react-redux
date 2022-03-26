@@ -13,9 +13,8 @@ import { useStyles } from "./styles";
 export const PokemonsPageLayout = ({
 	pokemonData,
 	cart,
-	contentToShow,
-	spinnerToShow,
-	errorToShow,
+	isLoading,
+	errors,
 	handleSnackbarOpen,
 	handleAddToCart,
 }) => {
@@ -31,7 +30,9 @@ export const PokemonsPageLayout = ({
 
 	return (
 		<>
-			{contentToShow && (
+			{isLoading ? (
+				<SquareSpinner />
+			) : (
 				<Paper className={classes.cardContainer} variant="outlined">
 					<Grid container sx={{ alignItems: "center" }}>
 						<Grid
@@ -76,8 +77,8 @@ export const PokemonsPageLayout = ({
 					</Grid>
 				</Paper>
 			)}
-			{spinnerToShow && <SquareSpinner />}
-			{errorToShow && <ErrorIndicator />}
+
+			{errors && <ErrorIndicator />}
 		</>
 	);
 };

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { ItemsCounterView } from "../components/ItemsCounterView";
 import { useCart } from "../../../hooks/useCart";
@@ -12,13 +12,13 @@ export const ItemsCounterContainer = ({ quantity, id }) => {
 		setItemQuantity(e.target.value);
 	};
 
-	const handleItemQuantityInc = () => {
+	const handleItemQuantityInc = useCallback(() => {
 		setItemQuantity((itemQuantity) => itemQuantity + 1);
-	};
+	}, []);
 
-	const handleItemQuantityDec = () => {
+	const handleItemQuantityDec = useCallback(() => {
 		setItemQuantity((itemQuantity) => itemQuantity - 1);
-	};
+	}, []);
 
 	useEffect(() => {
 		if (itemQuantity < 1) {

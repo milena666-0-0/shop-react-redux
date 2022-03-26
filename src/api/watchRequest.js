@@ -1,8 +1,7 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 
-import { isApiCallAction } from "../utils/isApiCallAction";
+import { isApiCallAction, createActionWithPostfix } from "../utils/index";
 import { apiCallsMapping } from "./apiCallsMapping";
-import { createActionWithPostfix } from "../utils/createActionWithPostfix";
 import { REQUEST_POSTFIXES } from "../constants/requestPostfixes";
 
 function* watchRequestWorker(action) {

@@ -33,7 +33,7 @@ ReactDOM.render(
 								<SignUpFormContainer />
 								<LogInFormContainer />
 								<PokemonsDetailsContainer />
-								<CartContainer/>
+								<CartContainer />
 							</Router>
 						</MainLayout>
 					</ThemeProvider>

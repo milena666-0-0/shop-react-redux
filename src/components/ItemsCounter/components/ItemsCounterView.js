@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { Button, Box } from "@mui/material";
 
 import { useStyles } from "./styles";
 
-export const ItemsCounterView = ({
+export const ItemsCounterView = memo(({
 	itemQuantity,
 	handleItemQuantityInc,
 	handleItemQuantityDec,
@@ -11,7 +12,13 @@ export const ItemsCounterView = ({
 	const classes = useStyles();
 
 	return (
-		<Box className={classes.container}>
+		<Box
+			sx={{
+				display: { xs: "flex", sm: "block" },
+				flexDirection: "column",
+			}}
+			className={classes.container}
+		>
 			<Button
 				className={classes.button}
 				onClick={handleItemQuantityDec}
@@ -37,4 +44,4 @@ export const ItemsCounterView = ({
 			</Button>
 		</Box>
 	);
-};
+});

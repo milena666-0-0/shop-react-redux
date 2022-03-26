@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Box } from "@mui/material";
 import { useFormik } from "formik";
 
 import { LogInFormView } from "../components/LogInFormView";
@@ -30,16 +29,10 @@ export const LogInFormContainer = () => {
 	useEffect(() => {
 		if (isAuth) {
 			navigate(ROUTE_NAMES.PRODUCTS);
-		};
+		}
 	}, [isAuth]);
 
 	return (
-		<Box>
-			<LogInFormView
-				isLoading={isLoading}
-				errors={errors}
-				formik={formik}
-			/>
-		</Box>
+		<LogInFormView isLoading={isLoading} errors={errors} formik={formik} />
 	);
 };

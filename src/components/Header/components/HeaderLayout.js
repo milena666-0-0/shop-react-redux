@@ -40,6 +40,7 @@ export const HeaderLayout = ({
 								className={classes.searchInputBase}
 								sx={{ ml: 1, flex: 1 }}
 								placeholder="Search here"
+								disabled
 								inputProps={{ "aria-label": "Search here" }}
 							/>
 							<Divider
@@ -66,11 +67,13 @@ export const HeaderLayout = ({
 								</Badge>
 							</IconButton>
 						</Link>
-						<IconButton sx={{ marginLeft: "15px" }}>
-							<Icon>
-								<img src={account} alt="account" />
-							</Icon>
-						</IconButton>
+						<Link to={ROUTE_NAMES.USER}>
+							<IconButton sx={{ marginLeft: "15px" }}>
+								<Icon>
+									<img src={account} alt="account" />
+								</Icon>
+							</IconButton>
+						</Link>
 					</Box>
 					<HeaderMenuLayout
 						handleOpenMenu={handleOpenMenu}

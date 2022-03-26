@@ -4,6 +4,7 @@ import { SignUpFormContainer } from "../pages/SignUpPage/containers/SignUpFormCo
 import { ProductsContainer } from "../pages/ProductsPage/containers/ProductsContainer";
 import { PokemonsDetailsContainer } from "../pages/PokemonsDetailsPage/containers/PokemonsDetailsContainer";
 import { CartContainer } from "../pages/Cart/containers/CartContainer";
+import {UserPageContainer} from '../pages/UserPage/containers/UserPageContainer';
 
 export const pagesForRouting = [
 	{
@@ -29,6 +30,11 @@ export const pagesForRouting = [
 	{
 		Component: CartContainer,
 		routePath: ROUTE_NAMES.CART,
+		isPrivate: true,
+	},
+	{
+		Component: UserPageContainer,
+		routePath: ROUTE_NAMES.USER,
 		isPrivate: true,
 	},
 ];

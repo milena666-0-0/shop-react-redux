@@ -5,4 +5,5 @@ export const ROUTE_NAMES = {
 	SIGN_UP: "/signup",
 	LOG_IN: "/login",
 	CART: "/cart",
+	USER: '/user'
 };

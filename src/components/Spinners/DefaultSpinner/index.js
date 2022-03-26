@@ -1,3 +1,4 @@
+
 import { CircularProgress, Box } from "@mui/material";
 
 export const DefaultSpinner = () => {

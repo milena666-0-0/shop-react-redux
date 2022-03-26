@@ -1,14 +1,14 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import { Box, IconButton, Menu, MenuItem } from "@mui/material";
 import { MoreVert as MoreIcon } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { headerUnauthMenuListData } from "../../config/headerUnauthMenuList";
 import { headerAuthMenuListData } from "../../config/headerAuthMenuList";
 import { useAuth } from "../../../../hooks/useAuth";
 
-export const HeaderMenuLayout = ({
+export const HeaderMenuLayout = memo(({
 	handleOpenMenu,
 	anchorEl,
 	handleCloseMenu,
@@ -20,6 +20,8 @@ export const HeaderMenuLayout = ({
 		() => (isAuth ? headerAuthMenuListData : headerUnauthMenuListData),
 		[isAuth]
 	);
+
+	const navigate = useNavigate();
 
 	return (
 		<Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -39,15 +41,28 @@ export const HeaderMenuLayout = ({
 				open={Boolean(anchorEl)}
 				onClose={handleCloseMenu}
 			>
-				{menuListToMap.map(({ label, pathTo }) => (
-					<MenuItem key={label} onClick={handleCloseMenu}>
-						<Link to={pathTo}>{label}</Link>
-					</MenuItem>
-				))}
+				{menuListToMap.map(({ label, pathTo, value }) => {
+					return (
+						<MenuItem
+							key={label}
+							value={value}
+							onClick={(e) => {
+								if (e.target.value === 4) {
+									handleLogOut();
+								}
+								handleCloseMenu();
+								navigate(pathTo);
+							}}
+							sx={{ minWidth: { xs: "200px" } }}
+						>
+							{label}
+						</MenuItem>
+					);
+				})}
 			</Menu>
 		</Box>
 	);
-};
+});
 
 HeaderMenuLayout.propTypes = {
 	handleOpenMenu: PropTypes.func,

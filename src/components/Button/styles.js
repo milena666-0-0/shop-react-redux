@@ -21,10 +21,6 @@ const styles = (theme) => ({
 			backgroundColor: theme.palette.secondary.dark,
 		},
 
-		"&:focusVisible}": {
-			outline: "none",
-		},
-
 	},
 	disabledButton: {
 		opacity: "0.5",

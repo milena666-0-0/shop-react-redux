@@ -10,9 +10,8 @@ import { useStyles } from "./styles";
 export const ProductsLayout = ({
 	productsList,
 	handleAddToCart,
-	errorToShow,
-	contentToShow,
-	spinnerToShow,
+	isLoading,
+	errors,
 }) => {
 	const classes = useStyles();
 
@@ -26,17 +25,20 @@ export const ProductsLayout = ({
 				},
 			}}
 		>
-			{contentToShow &&
+			{isLoading ? (
+				<SquareSpinner />
+			) : (
+				productsList &&
 				productsList.map((productsItem) => (
 					<ProductsCardContainer
 						handleAddToCart={handleAddToCart}
 						key={productsItem.id}
 						card={productsItem}
 					/>
-				))}
+				))
+			)}
 
-			{spinnerToShow && <SquareSpinner />}
-			{errorToShow && <ErrorIndicator />}
+			{errors && <ErrorIndicator />}
 		</Box>
 	);
 };

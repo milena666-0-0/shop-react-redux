@@ -12,8 +12,7 @@ const styles = (theme) => ({
 		padding: "30px",
 		position: "fixed",
 		top: "175px",
-		maxWidth: "300px",
-		width: "100%",
+		minWidth: "250px",
 	},
 	orderInfoContainer: {
 		display: "flex",
@@ -25,10 +24,51 @@ const styles = (theme) => ({
 		},
 	},
 	button: {
+		backgroundColor: theme.palette.secondary.main,
+		outline: "none",
+		border: "none",
 		letterSpacing: "0.05rem",
 		width: "100%",
 		height: "40px",
-        margin: 'auto'
+		margin: "auto",
+		fontWeight: "medium",
+		fontSize: "18px",
+		lineHeight: "23px",
+		color: "#FFFFFF",
+		"&:hover": {
+			backgroundColor: theme.palette.secondary.light,
+			cursor: "pointer",
+		},
+		"&:active": {
+			backgroundColor: theme.palette.secondary.dark,
+		},
+	},
+	buttonDisabled: {
+		backgroundColor: theme.palette.secondary.main,
+		outline: "none",
+		border: "none",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		letterSpacing: "0.05rem",
+		width: "100%",
+		height: "40px",
+		margin: "auto",
+		fontWeight: "medium",
+		fontSize: "18px",
+		lineHeight: "23px",
+		color: "#FFFFFF",
+		opacity: "0.5",
+		cursor: "not-allowed",
+	},
+	emptyMessage: {
+		display: "inline-block",
+		marginTop: "10px",
+		fontWeight: 500,
+	},
+	buttonContainer: {
+		display: "flex",
+		justifyContent: "center",
 	},
 });
 

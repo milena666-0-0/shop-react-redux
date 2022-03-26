@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { TableCell, TableRow, IconButton, Box } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 
@@ -5,7 +6,7 @@ import { ItemsCounterContainer } from "../../../../components/ItemsCounter/conta
 
 import { useStyles } from "./styles";
 
-export const CartItemView = ({ cartItem, handleDeleteFromCart }) => {
+export const CartItemView = memo(({ cartItem, handleDeleteFromCart }) => {
 	const classes = useStyles();
 
 	const { id, name, price, image, quantity } = cartItem;
@@ -19,7 +20,10 @@ export const CartItemView = ({ cartItem, handleDeleteFromCart }) => {
 			}}
 		>
 			<TableCell component="th" scope="row">
-				<Box className={classes.flexContainer}>
+				<Box
+					sx={{ flexDirection: { xs: "column", sm: "row" } }}
+					className={classes.flexContainer}
+				>
 					<img src={image} alt="pokemon" />
 					{name}
 				</Box>
@@ -37,4 +41,4 @@ export const CartItemView = ({ cartItem, handleDeleteFromCart }) => {
 			</TableCell>
 		</TableRow>
 	);
-};
+});

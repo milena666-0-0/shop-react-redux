@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 export const useSnackbar = () => {
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-	const handleSnackbarOpen = () => {
+	const handleSnackbarOpen = useCallback(() => {
 		setSnackbarOpen(true);
-	};
+	}, []);
 
-	const handleSnackbarClose = () => {
+	const handleSnackbarClose = useCallback(() => {
 		setSnackbarOpen(false);
-	};
+	}, []);
 
 	return { snackbarOpen, handleSnackbarOpen, handleSnackbarClose };
 };
