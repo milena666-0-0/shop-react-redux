@@ -10,13 +10,14 @@ export const PaginationView = memo(
 
 		return (
 			<Box className={classes.paginationContainer}>
-				<Stack spacing={2}>
+				<Stack spacing={1}>
 					<Pagination
 						className={classes.pagination}
 						count={pageCount}
 						page={page}
 						onChange={onPageChange}
 						disabled={Boolean(isLoading || errors)}
+						size="small"
 						color="secondary"
 					/>
 				</Stack>
@@ -30,5 +31,5 @@ PaginationView.propTypes = {
 	pageCount: PropTypes.number,
 	onPageChange: PropTypes.func.isRequired,
 	isLoading: PropTypes.bool,
-	errors: PropTypes.any
+	errors: PropTypes.any,
 };

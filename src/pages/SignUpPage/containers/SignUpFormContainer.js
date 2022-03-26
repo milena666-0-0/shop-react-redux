@@ -1,23 +1,25 @@
 import { useState, useCallback } from "react";
-import { Box } from "@mui/material";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { SIGN_UP_REQUEST } from "../actions/index";
 import { SignUpFormView } from "../components/SignUpFormView";
 import { signUpSelector } from "../selectors/index";
 import { validationSchema } from "../utils/validationSchema";
+import { ROUTE_NAMES } from "../../../routes/routeNames";
 
 export const SignUpFormContainer = () => {
-	const [inputType, setInputType] = useState("password");
-
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [inputType, setInputType] = useState("password");
 
 	const { errors, isLoading } = useSelector(signUpSelector);
 
 	const handleChangeInputType = useCallback(() => {
 		const newInputType = inputType === "password" ? "text" : "password";
-		
+
 		setInputType(newInputType);
 	}, [inputType]);
 
@@ -41,18 +43,17 @@ export const SignUpFormContainer = () => {
 		onSubmit: (values) => {
 			const { confirmPassword, ...requestData } = values;
 			dispatch(SIGN_UP_REQUEST(requestData));
+			if(!errors) navigate(ROUTE_NAMES.LOG_IN);
 		},
 	});
 
 	return (
-		<Box>
-			<SignUpFormView
-				handleChangeInputType={handleChangeInputType}
-				inputType={inputType}
-				isLoading={isLoading}
-				errors={errors}
-				formik={formik}
-			/>
-		</Box>
+		<SignUpFormView
+			handleChangeInputType={handleChangeInputType}
+			inputType={inputType}
+			isLoading={isLoading}
+			errors={errors}
+			formik={formik}
+		/>
 	);
 };

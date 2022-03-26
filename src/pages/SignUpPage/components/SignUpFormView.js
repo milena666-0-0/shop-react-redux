@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Button } from "../../../components/Button/index";
-import { isSubmitButtonDisabled } from "../../../utils/isSubmitButtonDisabled";
+import { isSubmitButtonDisabled } from "../../../utils/index";
 import { DefaultSpinner } from "../../../components/Spinners/DefaultSpinner/index";
 
 import { useStyles } from "./styles";
@@ -25,7 +25,7 @@ export const SignUpFormView = memo(
 	({ formik, errors, isLoading, handleChangeInputType, inputType }) => {
 		const classes = useStyles();
 
-		const isDisabled = !isSubmitButtonDisabled(formik) || isLoading;
+		const isDisabled = !isSubmitButtonDisabled(formik) || isLoading || errors;
 
 		return (
 			<form className={classes.form} onSubmit={formik.handleSubmit}>
@@ -158,6 +158,7 @@ export const SignUpFormView = memo(
 				</label>
 				<TextField
 					name="email"
+					autoComplete="email"
 					type="text"
 					color="secondary"
 					value={formik.values.email}
@@ -177,6 +178,7 @@ export const SignUpFormView = memo(
 
 				<TextField
 					color="secondary"
+					autoComplete="new-password"
 					name="password"
 					type={inputType}
 					value={formik.values.password}
@@ -186,7 +188,6 @@ export const SignUpFormView = memo(
 						endAdornment: (
 							<InputAdornment position="end">
 								<IconButton
-									aria-label="toggle password visibility"
 									onClick={handleChangeInputType}
 									edge="end"
 								>
@@ -200,6 +201,7 @@ export const SignUpFormView = memo(
 						),
 					}}
 				/>
+
 				<FormHelperText
 					className={classes.helper}
 					error={true}
@@ -207,6 +209,7 @@ export const SignUpFormView = memo(
 				>
 					{formik.errors.password}
 				</FormHelperText>
+
 				<label className={classes.label}>
 					Confirm password<span className={classes.required}>*</span>
 				</label>
@@ -214,6 +217,7 @@ export const SignUpFormView = memo(
 				<TextField
 					color="secondary"
 					name="confirmPassword"
+					autoComplete="new-password"
 					type="password"
 					value={formik.values.confirmPassword}
 					onChange={formik.handleChange}
@@ -227,7 +231,7 @@ export const SignUpFormView = memo(
 				>
 					{formik.errors.confirmPassword}
 				</FormHelperText>
-				{errors ? (
+				{errors && (
 					<FormHelperText
 						className={classes.helper}
 						error={true}
@@ -235,7 +239,7 @@ export const SignUpFormView = memo(
 					>
 						Account with this email has already been existed
 					</FormHelperText>
-				) : null}
+				)}
 				<Button
 					disabled={isDisabled}
 					label={isLoading ? <DefaultSpinner /> : "Sign in"}

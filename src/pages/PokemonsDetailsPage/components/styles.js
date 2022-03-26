@@ -23,7 +23,7 @@ const styles = (theme) => ({
 	},
 	price: {
 		fontWeight: 500,
-		fontSize: "23px",
+		fontSize: "17px",
 	},
 	coloredSpan: {
 		color: theme.palette.secondary.main,

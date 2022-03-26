@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { Button } from "../../../components/Button/index";
-import { isSubmitButtonDisabled } from "../../../utils/isSubmitButtonDisabled";
+import { isSubmitButtonDisabled } from "../../../utils/index";
 import { DefaultSpinner } from "../../../components/Spinners/DefaultSpinner/index";
 
 import { useStyles } from "./styles";
@@ -18,6 +18,7 @@ export const LogInFormView = memo(({ formik, errors, isLoading }) => {
 			<div className={classes.formLabel}>Log in</div>
 			<TextField
 				color="secondary"
+				autoComplete='username'
 				name="email"
 				type="text"
 				placeholder="Email"
@@ -35,6 +36,7 @@ export const LogInFormView = memo(({ formik, errors, isLoading }) => {
 
 			<TextField
 				color="secondary"
+				autoComplete='current-password'
 				name="password"
 				type="password"
 				placeholder="password"
@@ -49,11 +51,11 @@ export const LogInFormView = memo(({ formik, errors, isLoading }) => {
 			>
 				{formik.touched.password && formik.errors.password}
 			</FormHelperText>
-			{errors ? (
+			{errors && (
 				<FormHelperText className={classes.helper} error={true}>
 					Incorrect password or email
 				</FormHelperText>
-			) : null}
+			)}
 
 			<Button
 				disabled={isDisabled}

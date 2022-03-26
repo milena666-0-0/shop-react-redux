@@ -1,24 +1,19 @@
-import { memo } from "react";
 import { Box } from "@mui/material";
 import { PropTypes } from "prop-types";
 
-import { ProductsCardView } from "../../../components/ProductsCard/ProductsCardView";
+import { ProductsCardContainer } from "../../../components/ProductsCard/containers/ProductsCardContainer";
 import { SquareSpinner } from "../../../components/Spinners/SquareSpinner/index";
 import { ErrorIndicator } from "../../../components/Errors/ErrorIndicator";
-import { useRequestIndicatoors } from "../../../hooks/useRequestIndicatoors";
-import { productsSelector } from "../selectors/index";
 
 import { useStyles } from "./styles";
 
-export const ProductsLayout = memo(({ productsList }) => {
+export const ProductsLayout = ({
+	productsList,
+	handleAddToCart,
+	isLoading,
+	errors,
+}) => {
 	const classes = useStyles();
-
-	const { content, spinner, error } = useRequestIndicatoors(
-		productsSelector,
-		productsList,
-		SquareSpinner,
-		ErrorIndicator
-	);
 
 	return (
 		<Box
@@ -30,18 +25,23 @@ export const ProductsLayout = memo(({ productsList }) => {
 				},
 			}}
 		>
-			{content &&
+			{isLoading ? (
+				<SquareSpinner />
+			) : (
+				productsList &&
 				productsList.map((productsItem) => (
-					<ProductsCardView
+					<ProductsCardContainer
+						handleAddToCart={handleAddToCart}
 						key={productsItem.id}
 						card={productsItem}
 					/>
-				))}
-			{spinner}
-			{error}
+				))
+			)}
+
+			{errors && <ErrorIndicator />}
 		</Box>
 	);
-});
+};
 
 ProductsLayout.propTypes = {
 	productsList: PropTypes.arrayOf(PropTypes.object).isRequired,
