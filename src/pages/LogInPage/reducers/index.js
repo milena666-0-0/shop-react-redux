@@ -1,7 +1,7 @@
 import { handleActions } from "redux-actions";
 
 import * as actions from "../actions/index";
-import {localStorageKeys} from '../../../constants/localStorageKeys';
+import { localStorageKeys } from "../../../constants/localStorageKeys";
 
 const defaultState = {
 	isLoading: false,
@@ -13,31 +13,19 @@ const defaultState = {
 
 export const signInReducer = handleActions(
 	{
-		[actions.SIGN_IN_REQUEST]: (state) => {
-			return {
-				...state,
-				isLoading: true,
-				errors: null,
-			};
-		},
-		[actions.SIGN_IN_SUCCESS]: (state, { payload }) => {
-			const { accessToken, ...userData } = payload.response;
+		[actions.SIGN_IN]: (state, { payload }) => {
+			const { accessToken, ...userData } = payload;
+			localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
 
-            localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
-            
+			const auth = accessToken ? true : false;
+
 			return {
 				...state,
-				isLoading: false,
-				isAuth: true,
 				userData,
 				accessToken,
-			};
-		},
-		[actions.SIGN_IN_FAIL]: (state, { payload }) => {
-			return {
-				...state,
-				isLoading: false,
-				errors: payload.response,
+				isAuth: auth,
+				isLoading: true,
+				errors: null,
 			};
 		},
 	},

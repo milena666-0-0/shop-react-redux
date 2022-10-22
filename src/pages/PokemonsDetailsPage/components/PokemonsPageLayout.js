@@ -20,13 +20,16 @@ export const PokemonsPageLayout = ({
 }) => {
 	const classes = useStyles();
 
-	const { name, stats, abilities, image, price, id } = pokemonData;
+	const { name, stats, sprites, weight, id, abilities } = pokemonData;
 
 	const findpokemonInCart = cart.itemsList.find(
 		(pokemon) => pokemon.id === id
 	);
 
-	const pokemonDataToAddToCart = { id, name, image, price, quantity: 1 };
+	const pokemonDataToAddToCart = {
+		...pokemonData,
+		quantity: 1,
+	};
 
 	return (
 		<>
@@ -45,10 +48,10 @@ export const PokemonsPageLayout = ({
 							{name}
 						</Grid>
 						<Grid item xs={6} md={8}>
-							<img src={image} alt={name} />
+							<img src={sprites?.front_default} alt={name} />
 						</Grid>
 						<Grid className={classes.price} item xs={6} md={4}>
-							<Box sx={{ marginBottom: "10px" }}>{price}$</Box>
+							<Box sx={{ marginBottom: "10px" }}>{weight}$</Box>
 							{findpokemonInCart ? (
 								<Link to={ROUTE_NAMES.CART}>
 									<Button color="secondary" size="small">

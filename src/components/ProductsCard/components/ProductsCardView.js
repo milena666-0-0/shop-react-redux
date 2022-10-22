@@ -1,5 +1,5 @@
-import { memo } from "react";
-
+import { memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
 	Card,
 	CardContent,
@@ -17,7 +17,7 @@ export const ProductsCardView = memo(
 	({ cart, pokemon, handleSnackbarOpen, handleAddToCart }) => {
 		const classes = useStyles();
 
-		const { id, name, image, price } = pokemon;
+		const { name, id, sprites, weight } = pokemon;
 
 		const pokemonDataToAddToCart = { ...pokemon, quantity: 1 };
 
@@ -27,7 +27,7 @@ export const ProductsCardView = memo(
 
 		return (
 			<Card sx={{ flexGrow: 4, minWidth: "263px" }}>
-				<img src={image} alt="pokemon" />
+				<img src={sprites?.front_default} alt="pokemon" />
 				<CardContent>
 					<span className={classes.name}>{name}</span>
 					<Typography
@@ -35,7 +35,7 @@ export const ProductsCardView = memo(
 						color="secondary"
 						gutterBottom
 					>
-						{price}$
+						{weight}$
 					</Typography>
 				</CardContent>
 				<CardActions>

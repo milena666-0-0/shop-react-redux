@@ -15,6 +15,7 @@ import { CartContainer } from "./pages/Cart/containers/CartContainer";
 import { MainLayout } from "./components/MainLayout/index";
 import { Router } from "./routes/Router";
 import { theme } from "./static/theme/index";
+import "./firebase";
 
 import "./styles/normalize.css";
 

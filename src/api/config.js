@@ -3,7 +3,7 @@ import axios from "axios";
 import { localStorageKeys } from "../constants/localStorageKeys";
 import AuthService from "../services/authService";
 
-const BASE_URL = "https://it-shatle-demo-api.herokuapp.com";
+const BASE_URL = "https://pokeapi.co/api/v2/";
 
 const config = {
 	baseURL: BASE_URL,

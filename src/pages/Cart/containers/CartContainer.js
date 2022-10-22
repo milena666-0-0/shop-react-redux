@@ -1,26 +1,25 @@
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { cartSelector } from "../selectors/index";
 import { CartLayout } from "../components/CartLayout";
 import { useCart, useModal } from "../../../hooks/index";
-import { MAKE_ORDER_REQUEST } from "../actions/index";
+import { MAKE_ORDER } from "../actions/index";
 
 export const CartContainer = () => {
 	const dispatch = useDispatch();
 
 	const { isLoading, errors } = useSelector(cartSelector);
 
-	const { cart, getCartData, handleDeleteFromCart } = useCart();
+	const { cart, handleDeleteFromCart } = useCart();
 	const { openModal, handleModalClose, handleModalOpen } = useModal();
 
-	const handleMakeOrder = useCallback((orderData) => {
-		dispatch(MAKE_ORDER_REQUEST(orderData));
-	}, []);
-
-	useEffect(() => {
-		getCartData();
-	}, []);
+	const handleMakeOrder = useCallback(
+		(orderData) => {
+			dispatch(MAKE_ORDER(orderData));
+		},
+		[dispatch]
+	);
 
 	return (
 		<CartLayout

@@ -2,13 +2,11 @@ import { makeStyles } from "@mui/styles";
 
 const styles = (theme) => ({
 	container: {
-		display: "flex",
-		justifyContent: "space-around",
 		border: "1px solid #c4c4c4",
 		padding: "20px",
 		borderRadius: "4px",
 		maxWidth: "45%",
-		maxHeight: '200px',
+		maxHeight: "200px",
 		width: "100%",
 	},
 	title: {

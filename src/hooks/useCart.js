@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { cartSelector } from "../pages/Cart/selectors/index";
 import {
-	CART_REQUEST,
-	ADD_TO_CART_REQUEST,
-	REMOVE_FROM_CART_REQUEST,
-	UPDATE_QUANTITY_REQUEST,
+	ADD_TO_CART,
+	REMOVE_FROM_CART,
+	UPDATE_QUANTITY,
 } from "../pages/Cart/actions/index";
 
 export const useCart = () => {
@@ -14,12 +13,8 @@ export const useCart = () => {
 
 	const cart = useSelector(cartSelector);
 
-	const getCartData = useCallback(() => {
-		dispatch(CART_REQUEST());
-	}, []);
-
 	const handleAddToCart = useCallback((pokemonData) => {
-		dispatch(ADD_TO_CART_REQUEST(pokemonData));
+		dispatch(ADD_TO_CART(pokemonData));
 	}, []);
 
 	const handleQuantityChange = useCallback((id, quantity) => {
@@ -28,16 +23,15 @@ export const useCart = () => {
 			quantity,
 		};
 
-		dispatch(UPDATE_QUANTITY_REQUEST(dataToDispatch));
+		dispatch(UPDATE_QUANTITY(dataToDispatch));
 	}, []);
 
 	const handleDeleteFromCart = useCallback((pokemonId) => {
-		dispatch(REMOVE_FROM_CART_REQUEST(pokemonId));
+		dispatch(REMOVE_FROM_CART(pokemonId));
 	}, []);
 
 	return {
 		cart,
-		getCartData,
 		handleAddToCart,
 		handleDeleteFromCart,
 		handleQuantityChange,

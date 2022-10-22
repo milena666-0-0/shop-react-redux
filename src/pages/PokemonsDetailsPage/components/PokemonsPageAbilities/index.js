@@ -8,15 +8,12 @@ export const PokemonsPageAbilitiesView = memo(({ abilities }) => {
 
 	return (
 		<Box>
-			{abilities &&
-				abilities.map((ability) => (
-					<div key={ability.title} className={classes.textContainer}>
-						<span className={classes.coloredSpan}>
-							{ability.title}
-						</span>
-						<div>{ability.description}</div>
-					</div>
-				))}
+			{abilities?.map(({ name, effect_entries, id }) => (
+				<div key={id} className={classes.textContainer}>
+					<span className={classes.coloredSpan}>{name}</span>
+					<div>{effect_entries && effect_entries[1].effect}</div>
+				</div>
+			))}
 		</Box>
 	);
 });

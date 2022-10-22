@@ -10,25 +10,12 @@ const defaultState = {
 
 export const signUpReducer = handleActions(
 	{
-		[actions.SIGN_UP_REQUEST]: (state) => {
+		[actions.SIGN_UP]: (state, { payload }) => {
 			return {
 				...state,
+				userData: payload,
 				errors: null,
 				isLoading: true,
-			};
-		},
-        [actions.SIGN_UP_SUCCESS]: (state) => {
-			return {
-				...state,
-				errors: null,
-				isLoading: false,
-			};
-		},
-        [actions.SIGN_UP_FAIL]: (state, {payload}) => {
-			return {
-				...state,
-				errors: payload.response,
-				isLoading: false,
 			};
 		},
 	},
