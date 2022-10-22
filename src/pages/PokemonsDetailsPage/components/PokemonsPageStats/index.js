@@ -12,9 +12,14 @@ export const PokemonsPageStatsView = memo(({ stats }) => {
 		<Box className={classes.statsContainer}>
 			{stats &&
 				stats.map((stat) => (
-					<Box className={classes.stats} key={stat.title}>
-						<img src={statsImages[stat.title]} alt={stat.title} />
-						<div className={classes.statsValue}>{stat.value}</div>
+					<Box className={classes.stats} key={stat.stat.name}>
+						<img
+							src={statsImages[stat.stat.name]}
+							alt={stat.stat.name}
+						/>
+						<div className={classes.statsValue}>
+							{stat.base_stat}
+						</div>
 					</Box>
 				))}
 		</Box>

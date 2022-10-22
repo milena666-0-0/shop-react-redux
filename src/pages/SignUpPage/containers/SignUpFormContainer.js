@@ -2,8 +2,9 @@ import { useState, useCallback } from "react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import { SIGN_UP_REQUEST } from "../actions/index";
+import { SIGN_UP } from "../actions/index";
 import { SignUpFormView } from "../components/SignUpFormView";
 import { signUpSelector } from "../selectors/index";
 import { validationSchema } from "../utils/validationSchema";
@@ -40,10 +41,29 @@ export const SignUpFormContainer = () => {
 			confirmPassword: "",
 		},
 		validationSchema: validationSchema,
-		onSubmit: (values) => {
+		onSubmit: async (values) => {
 			const { confirmPassword, ...requestData } = values;
-			dispatch(SIGN_UP_REQUEST(requestData));
-			if(!errors) navigate(ROUTE_NAMES.LOG_IN);
+
+			const auth = getAuth();
+			await createUserWithEmailAndPassword(
+				auth,
+				values.email,
+				values.password
+			)
+				.then(({ user }) => {
+					dispatch(
+						SIGN_UP({
+							...requestData,
+							id: user.id,
+							accessToken: user.accessToken,
+						})
+					);
+				})
+				.catch(({ message }) => {
+					console.log(message);
+				});
+
+			navigate(ROUTE_NAMES.PRODUCTS);
 		},
 	});
 

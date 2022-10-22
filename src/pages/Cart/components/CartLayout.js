@@ -29,12 +29,12 @@ export const CartLayout = ({
 }) => {
 	const classes = useStyles();
 
-	const { itemsList, totalPrice, quantity, customerId } = cart;
+	const { itemsList, totalPrice, quantity } = cart;
 
 	const orderData = {
-		customerId,
 		totalPrice,
 		itemsList,
+		createdAt: new Date(),
 	};
 
 	const buttonDisabledClass =

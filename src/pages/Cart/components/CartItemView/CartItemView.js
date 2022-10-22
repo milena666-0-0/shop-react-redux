@@ -9,7 +9,7 @@ import { useStyles } from "./styles";
 export const CartItemView = memo(({ cartItem, handleDeleteFromCart }) => {
 	const classes = useStyles();
 
-	const { id, name, price, image, quantity } = cartItem;
+	const { id, name, weight, sprites, quantity } = cartItem;
 
 	return (
 		<TableRow
@@ -24,14 +24,14 @@ export const CartItemView = memo(({ cartItem, handleDeleteFromCart }) => {
 					sx={{ flexDirection: { xs: "column", sm: "row" } }}
 					className={classes.flexContainer}
 				>
-					<img src={image} alt="pokemon" />
+					<img src={sprites.front_default} alt="pokemon" />
 					{name}
 				</Box>
 			</TableCell>
 			<TableCell align="center" component="th" scope="row">
 				<Box className={classes.flexContainer}>
 					<ItemsCounterContainer id={id} quantity={quantity} />
-					<span className={classes.span}>{price * quantity}$</span>
+					<span className={classes.span}>{weight * quantity}$</span>
 				</Box>
 			</TableCell>
 			<TableCell padding="none" component="th" scope="row">

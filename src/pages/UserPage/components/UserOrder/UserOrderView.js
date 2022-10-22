@@ -45,8 +45,13 @@ export const UserOrderView = memo(({ orderedAt, totalPrice, itemsList }) => {
 						<TableBody>
 							{itemsList &&
 								itemsList.map((item) => {
-									const { name, image, quantity, price, id } =
-										item;
+									const {
+										name,
+										sprites,
+										quantity,
+										weight,
+										id,
+									} = item;
 									return (
 										<TableRow
 											key={id}
@@ -65,7 +70,9 @@ export const UserOrderView = memo(({ orderedAt, totalPrice, itemsList }) => {
 													}}
 												>
 													<img
-														src={image}
+														src={
+															sprites.front_default
+														}
 														alt="pokemon"
 													/>
 													{name}
@@ -75,7 +82,7 @@ export const UserOrderView = memo(({ orderedAt, totalPrice, itemsList }) => {
 												{quantity}
 											</TableCell>
 											<TableCell sx={{ padding: "5px" }}>
-												{price}
+												{weight}
 											</TableCell>
 										</TableRow>
 									);
